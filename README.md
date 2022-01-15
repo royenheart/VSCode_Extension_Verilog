@@ -61,6 +61,10 @@ Delete out in .gitignore for upload out folder.
 2018/05/08
 Modify the file open operation to fixed decoding problem in China.
 
+### 1.0.6
+2022/01/15
+Add function to choose where to store the testbench file
+
 -----------------------------------------------------------------------------------------------------------
 
 ## Other

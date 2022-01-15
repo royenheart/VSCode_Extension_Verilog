@@ -45,6 +45,31 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     context.subscriptions.push(testbench);
+
+    let get_testbench_file = vscode.commands.registerCommand('extension.get_testbench_file', () => {
+        // The code can get the document name and then it activates python code to generate testbench
+        // Then it will generate the testbench file
+
+        vscode.window.showSaveDialog( {
+            filters: {
+                v: ['v'],
+            },
+            saveLabel: "save as"
+        }).then(__filename => {
+            let editor = vscode.window.activeTextEditor;
+            if(!editor || !__filename){
+                return;
+            }
+            let ter1 = vscode.window.createTerminal({name:'get_testbench_file'});
+            ter1.show(true);
+            ter1.sendText(`python ${__dirname}\\vTbgenerator.py ${editor.document.fileName} ${__filename.fsPath}`);
+
+            // Display a message box to the user
+            vscode.window.showInformationMessage('Generate testbench file successfully!');
+        });
+    });
+
+    context.subscriptions.push(get_testbench_file);
 }
 
 // this method is called when your extension is deactivated
